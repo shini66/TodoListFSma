@@ -5,7 +5,7 @@
 @section('content')
     <div class="mb-8">
         <h2 class="text-3xl font-bold tracking-tight">Mis Tareas</h2>
-        <p class="mt-1 text-gray-600 dark:text-gray-400">
+        <p class="mt-1 text-gray-600">
             Administrá tus tareas pendientes y completadas.
         </p>
     </div>

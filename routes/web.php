@@ -3,9 +3,6 @@
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 
 //Route::resource('tasks', TaskController::class);
@@ -16,3 +13,13 @@ Route::get('/tasks/{task}/edit', [TaskController::class, 'edit']);
 Route::post('/tasks/{task}', [TaskController::class, 'update']);
 Route::get('/tasks/{task}/toggle', [TaskController::class, 'toggle']);
 Route::delete('/tasks/{task}', [TaskController::class, 'destroy']);
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});

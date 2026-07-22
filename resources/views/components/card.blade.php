@@ -1,5 +1,5 @@
 <div  {{ $attributes->merge([
-    'class' => 'rounded-xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900'
+    'class' => 'rounded-xl border border-gray-200 bg-white p-6 shadow-sm'
 ]) }} >
     <div class="flex items-start justify-between gap-4">
         <div class="flex items-start gap-3 flex-1">
@@ -9,13 +9,13 @@
                 </svg>
             @endif
             <div>
-                <h3 class='text-lg font-semibold {{ $completed ? "line-through" : "" }} text-gray-400 dark:text-gray-500'>{{ $title }}</h3>
+                <h3 class='text-lg font-semibold {{ $completed ? "line-through" : "" }} text-gray-400'>{{ $title }}</h3>
                 @if($completed)
-                    <p class="mt-1 text-sm text-gray-400 dark:text-gray-500">
+                    <p class="mt-1 text-sm text-gray-400">
                         Esta tarea ya fue finalizada.
                     </p>
                 @else
-                    <p class="mt-1 text-sm text-gray-400 dark:text-gray-500">
+                    <p class="mt-1 text-sm text-gray-400">
                         {{ $description }}.
                     </p>
                 @endif
@@ -24,8 +24,8 @@
         </div>
         <span @class([
             'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium',
-            'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' => $completed,
-            'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200' => !$completed,
+            'bg-green-100 text-green-800' => $completed,
+            'bg-yellow-100 text-yellow-800' => !$completed,
         ])>
             {{ $completed ? 'Completada' : 'Pendiente' }}
         </span>
