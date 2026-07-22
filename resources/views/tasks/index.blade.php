@@ -45,4 +45,8 @@
         </div>
     </div>
 
+    <x-alert type='danger' title='Error'>
+        Hubo un error en el procesado
+    </x-alert>
+    <x-button type='success'>Cerrar</x-button>
 @endsection
