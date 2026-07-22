@@ -73,7 +73,21 @@ return [
     |
     */
 
-    'home' => '/dashboard',
+    'home' => '/tasks',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Redirects
+    |--------------------------------------------------------------------------
+    |
+    | Here you may configure redirect paths for specific Fortify actions.
+    | This overrides the default fallback to the "home" path.
+    |
+    */
+
+    'redirects' => [
+        'logout' => '/login',
+    ],
 
     /*
     |--------------------------------------------------------------------------
