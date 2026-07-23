@@ -8,11 +8,10 @@ use Illuminate\Translation\PotentiallyTranslatedString;
 
 class ProhibitedWords implements ValidationRule
 {
-
     protected array $forbiddenWords = [
         'spam',
         'fake',
-        'prohibited'
+        'prohibited',
     ];
 
     /**
@@ -22,9 +21,10 @@ class ProhibitedWords implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        foreach($this->forbiddenWords as $word){
-            if(stripos($value, $word) !== false){
+        foreach ($this->forbiddenWords as $word) {
+            if (stripos($value, $word) !== false) {
                 $fail("El campo {$attribute} contiene palabras prohibidas");
+
                 return;
             }
         }
