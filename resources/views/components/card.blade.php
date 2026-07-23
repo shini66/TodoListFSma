@@ -9,14 +9,14 @@
                 </svg>
             @endif
             <div>
-                <h3 class='text-lg font-semibold {{ $completed ? "line-through" : "" }} text-gray-400'>{{ $title }}</h3>
+                <h3 class='text-lg font-semibold {{ $completed ? "line-through text-gray-400" : "text-gray-900" }}'>{{ $title }}</h3>
                 @if($completed)
                     <p class="mt-1 text-sm text-gray-400">
                         Esta tarea ya fue finalizada.
                     </p>
                 @else
-                    <p class="mt-1 text-sm text-gray-400">
-                        {{ $description }}.
+                    <p class="mt-1 text-sm text-gray-600">
+                        {{ $description }}
                     </p>
                 @endif
 
@@ -32,12 +32,12 @@
     </div>
 
     <div class="mt-5 flex items-center gap-3">
-        <x-button type="danger">
+        <x-danger-button type="button">
             Eliminar
-        </x-button>
+        </x-danger-button>
 
         @unless ($completed)
-            <x-button type="success" class="text-9xl">
+            <x-button type="button">
                 Completar
             </x-button>
         @endunless

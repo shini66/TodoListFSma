@@ -3,59 +3,73 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TaskRequest;
+use App\Models\Manager;
 use App\Models\Task;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class TaskController extends Controller
 {
-    public function index(){
-        $tasks = Task::all();
-        return response()->json($tasks);
+    public function index(): View
+    {
+        $tasks = Task::with('manager')->get();
+
+        return view('tasks.index', compact('tasks'));
     }
 
-    public function show(string $id){
-        return response()->json(Task::findOrFail($id));
+    public function create(): View
+    {
+        $managers = Manager::all();
+
+        return view('tasks.create', compact('managers'));
     }
 
-    public function store(TaskRequest $request){
+    public function show(string $id): View
+    {
+        $task = Task::with('manager')->findOrFail($id);
+
+        return view('tasks.show', compact('task'));
+    }
+
+    public function store(TaskRequest $request): RedirectResponse
+    {
         $task = Task::create($request->validated());
-        return response()->json($task, Response::HTTP_CREATED);
+
+        return redirect()->route('tasks.index')->with('status', 'Tarea creada correctamente.');
     }
 
-    public function edit(string $id){
+    public function edit(string $id): View
+    {
         $task = Task::findOrFail($id);
-        return response()->json($task, Response::HTTP_OK);
+        $managers = Manager::all();
+
+        return view('tasks.edit', compact('task', 'managers'));
     }
 
-    public function update(TaskRequest $request, string $id){
+    public function update(TaskRequest $request, string $id): RedirectResponse
+    {
         $task = Task::findOrFail($id);
 
-        $task->title = $request->get('title');
-        $task->description = $request->get('description');
-        $task->completed = $request->get('completed');
-        $task->manager_id = $request->get('manager_id');
-        $task->save();
+        $task->update($request->validated());
 
-        return response()->json($task, Response::HTTP_CREATED);
+        return redirect()->route('tasks.index')->with('status', 'Tarea actualizada correctamente.');
     }
 
-    public function toggle(string $id){
+    public function toggle(string $id): RedirectResponse
+    {
         $task = Task::findOrFail($id);
         $task->completed = true;
         $task->save();
 
-        return response()->json($task, Response::HTTP_CREATED);
+        return redirect()->route('tasks.index')->with('status', 'Tarea completada.');
     }
 
-    public function destroy(string $id){
+    public function destroy(string $id): RedirectResponse
+    {
         $task = Task::findOrFail($id);
 
-        if(!$task){
-            return response()->json(Response::HTTP_NOT_FOUND);
-        }
-
         $task->delete();
-        return response()->json(Response::HTTP_OK);
+
+        return redirect()->route('tasks.index')->with('status', 'Tarea eliminada correctamente.');
     }
 }

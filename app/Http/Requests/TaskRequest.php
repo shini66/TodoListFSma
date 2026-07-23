@@ -24,10 +24,10 @@ class TaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required','min:3','max:100', ProhibitedWords::class],
+            'title' => ['required', 'min:3', 'max:100', new ProhibitedWords],
             'description' => 'nullable|max:200',
             'completed' => 'boolean',
-            'manager_id' => 'required|numeric|exists:managers,id'
+            'manager_id' => 'required|numeric|exists:managers,id',
         ];
     }
 }

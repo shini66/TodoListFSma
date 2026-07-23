@@ -8,8 +8,8 @@ use Illuminate\View\Component;
 
 class Alert extends Component
 {
-
     public $type;
+
     public $title;
 
     /**

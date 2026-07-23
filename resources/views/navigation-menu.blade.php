@@ -15,6 +15,12 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link href="{{ route('tasks.index') }}" :active="request()->routeIs('tasks.*')">
+                        {{ __('Tareas') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('managers.index') }}" :active="request()->routeIs('managers.*')">
+                        {{ __('Managers') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -141,6 +147,12 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link href="{{ route('tasks.index') }}" :active="request()->routeIs('tasks.*')">
+                {{ __('Tareas') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link href="{{ route('managers.index') }}" :active="request()->routeIs('managers.*')">
+                {{ __('Managers') }}
             </x-responsive-nav-link>
         </div>
 
